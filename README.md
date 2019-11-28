@@ -1,2 +1,2 @@
 # BuyPal
-Online delivery system
+ - Online delivery system
