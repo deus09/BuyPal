@@ -132,15 +132,12 @@ customer makepayment(customer u1)
       fin.close();
       pop.close();
     }
-    else
-    {
-      //cardnot verified;
-    }
   }
   else
   {
       cout << "Thank you...visit again :)" << endl;
   }
+  return u1;
 }
 customer create_user_obj(string username){
   customer obj;
