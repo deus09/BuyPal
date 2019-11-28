@@ -114,8 +114,8 @@ bool email_otp(string username,string email_id)
         {
             generate_mail(username,email_id);
             string s="curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd \
-            --mail-from 'buypaliitj@gmail.com' --mail-rcpt '" + email_id + "' \
-            --upload-file 'Data/mail.txt' --user 'buypaliitj@gmail.com:buypalnsfw789' --insecure";
+            --mail-from 'Admin's Email_id' --mail-rcpt '" + email_id + "' \
+            --upload-file 'Data/mail.txt' --user 'Admin's Email_id:Password' --insecure";
             const char *command=s.c_str();
             system(command);
             return true;
