@@ -7,6 +7,15 @@
 using namespace std;
 #define MAX 62
 
+string encrypt(string s)
+{
+    for(int i=0;i<s.size();i++)
+    {
+        s[i]+=5;
+    }
+    return s;
+}
+
 void SetStdinEcho(bool enable = true)
 {
     struct termios tty;
@@ -28,7 +37,6 @@ string input_password()
     return password;
 }
 
-
 bool check(string email_id)
 {
     for(int i=0;i<email_id.size();i++)
@@ -37,6 +45,31 @@ bool check(string email_id)
             return true;
     }
     return false;
+}
+
+bool is_valid_no(string num)
+{
+    if(num.size()!=10)
+        return false;
+    for(int i=0;i<num.size();i++)
+    {
+        if(num[i]<'0' || num[i]>'9')
+            return false;
+    }
+    return true;
+}
+
+bool is_password_valid(string s)
+{
+    bool flag_num=false,flag_special_char=false;
+    for(int i=0;i<s.size();i++)
+    {
+        if(s[i]>='0' && s[i]<='9')
+            flag_num=true;
+        if((s[i]>=32 && s[i]<=47) || (s[i]>=58 && s[i]<=64) || (s[i]>=91 && s[i]<=96) || (s[i]>=123 && s[i]<=126))
+            flag_special_char=true;
+    }
+    return flag_num && flag_special_char;
 }
 
 string alphaNum="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -82,7 +115,7 @@ bool email_otp(string username,string email_id)
             generate_mail(username,email_id);
             string s="curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd \
             --mail-from 'buypaliitj@gmail.com' --mail-rcpt '" + email_id + "' \
-            --upload-file 'mail.txt' --user 'buypaliitj@gmail.com:buypalnsfw789' --insecure";
+            --upload-file 'Data/mail.txt' --user 'buypaliitj@gmail.com:buypalnsfw789' --insecure";
             const char *command=s.c_str();
             system(command);
             return true;
@@ -129,10 +162,11 @@ bool is_user(string username,string password)
 
 customer createid()
 {
-    string username,password,check_password,email_id;
+    string username,password="",check_password,email_id;
     bool verify=false;
     while(!verify)
     {
+        cout << endl;
         bool flag=0;
         while(!flag)
         {
@@ -140,33 +174,40 @@ customer createid()
             cin >> email_id;
             if(check(email_id))
                 flag=1;
+            else
+            {
+                cout << endl << "Enter valid Email_id : " << endl;
+            }
         }
         cout << "Username : ";
         cin >> username;
-        cout << "Password : ";
-        password=input_password();
-        cout << "\nConfirm Password : ";
-        check_password=input_password();
-        if(password==check_password)
+        while(!is_password_valid(password))
         {
-            if(!is_already_exists(username,email_id))
+            cout << endl << "!!! Password should carry at least one special character and a number" << endl;
+            cout << "Password : ";
+            password=input_password();
+            cout << endl << "Confirm Password : ";
+            check_password=input_password();
+            cout << endl;
+            if(password!=check_password)
             {
-                cout << "\nEnter Personal details \n\n";
-                verify=true;
+                cout << "Please Enter same password :(" << endl;
+                continue;
             }
-            else
-            {
-                cout << "\nUsername'\'Email_id already exists :(\n";  
-            }
+        }
+        if(!is_already_exists(username,email_id))
+        {
+            cout << endl << "Enter Personal details" << endl << endl;
+            verify=true;
         }
         else
         {
-            cout << "\nPlease Enter same password :(\n";
+            cout << endl << "Username\\Email_id already exists :(" << endl;  
         }
     }
     customer new_user;
     new_user.username=username;
-    new_user.password=password;
+    new_user.password=encrypt(password);
     new_user.email_id=email_id;
     cout << "Name : ";
     cin >> new_user.name;
@@ -174,7 +215,7 @@ customer createid()
     {
         cout << "Mobile No. : ";
         cin >> new_user.mobile_no;
-        if(new_user.mobile_no.size()!=10)
+        if(!is_valid_no(new_user.mobile_no))
         {
             cout << "Enter Valid number \n";
         }

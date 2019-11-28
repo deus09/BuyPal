@@ -70,65 +70,115 @@ void DisplayDeliverySlot()
 {
     string s;
     ifstream file1;
-    cout<<"Slot 8AM to 11AM:-"<<endl;
+    cout << endl << "Slot 8AM to 11AM:-" << endl;
     file1.open("Data/DeliveryBoy0.txt",ios::in);
-    while(file1)
+    if(file1.peek()==ifstream::traits_type::eof())
     {
-        getline(file1,s);
-        cout<<s<<endl;
+        cout << "No deliveries are pending in this slot :)" << endl;
     }
+    else
+    {    
+        while(file1)
+        {
+            getline(file1,s);
+            cout<<s<<endl;
+        }
     file1.close();
-    cout<<"Slot 11AM to 2PM:-"<<endl;
+    }
+    cout << endl << "Slot 11AM to 2PM:-" << endl;
     file1.open("Data/DeliveryBoy1.txt",ios::in);
-    while(file1)
+    if(file1.peek()==ifstream::traits_type::eof())
     {
-        getline(file1,s);
-        cout<<s<<endl;
+        cout << "No deliveries are pending in this slot :)" << endl;
     }
-    file1.close();
-    cout<<"Slot 2PM to 5PM:-"<<endl;
+    else
+    {
+        while(file1)
+        {
+            getline(file1,s);
+            cout<<s<<endl;
+        }
+        file1.close();
+    }
+    cout << endl << "Slot 2PM to 5PM:-" << endl;
     file1.open("Data/DeliveryBoy2.txt",ios::in);
-    while(file1)
+    if(file1.peek()==ifstream::traits_type::eof())
     {
-        getline(file1,s);
-        cout<<s<<endl;
+        cout << "No deliveries are pending in this slot :)" << endl;
     }
-    file1.close();
-    cout<<"Slot 5PM to 8PM:-"<<endl;
+    else
+    {
+        while(file1)
+        {
+            getline(file1,s);
+            cout<<s<<endl;
+        }
+        file1.close();
+    }
+    cout << endl << "Slot 5PM to 8PM:-" << endl;
     file1.open("Data/DeliveryBoy3.txt",ios::in);
-    while(file1)
+    if(file1.peek()==ifstream::traits_type::eof())
     {
-        getline(file1,s);
-        cout<<s<<endl;
+        cout << "No deliveries are pending in this slot :)" << endl;
     }
-    file1.close();
-    cout<<"Slot 8PM to 11PM:-"<<endl;
+    else
+    {
+        while(file1)
+        {
+            getline(file1,s);
+            cout<<s<<endl;
+        }
+        file1.close();
+    }
+    cout << endl << "Slot 8PM to 11PM:-" << endl;
     file1.open("Data/DeliveryBoy4.txt",ios::in);
-    while(file1)
+    if(file1.peek()==ifstream::traits_type::eof())
     {
-        getline(file1,s);
-        cout<<s<<endl;
+        cout << "No deliveries are pending in this slot :)" << endl;
     }
-    file1.close();
+    else
+    {
+        while(file1)
+        {
+            getline(file1,s);
+            cout<<s<<endl;
+        }
+        file1.close();
+    }
 }
 
 void delivery()
 {
-  int flag;
-  cout << "\n[1]View Pending deliveries : ";
-  cout << "[2]complete all delivery : ";
-  cout << "[3]Assign DeliveryBoys : ";
+while(true)
+{
+  string flag;
+  cout << endl;
+  cout << "[1]View Pending deliveries\n";
+  cout << "[2]complete all delivery\n";
+  cout << "[3]Assign DeliveryBoys\n";
+  cout << endl;
+  cout << "Choice : ";
   cin >> flag;
-  if(flag==1)
+  if(flag=="1")
   {
     DisplayDeliverySlot();
   }
-  else if(flag==2)
+  else if(flag=="2")
   {
     completeDelivery();
   }
-  else
+  else if(flag=="3")
   {
     AssignCart();
   }
+  else
+  {
+    cout << "Wrong Input :( \n";
+  }
+  cout << "[1] Continue\n";
+  cout << "Press another key to exit :)\n";
+  cin >> flag;
+  if(flag!="1")
+    break;  
+}
 }

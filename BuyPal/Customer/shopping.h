@@ -16,7 +16,9 @@ void shopping(int itemno,int quantity){
        
         for(int i=0;i<l.size();i++){
             if(l[i]==' ')
+            {
                 count++;
+            }
             if(count==3 && l[i]!=' ')
             {
                 num=num*10+(l[i]-'0');
@@ -26,12 +28,12 @@ void shopping(int itemno,int quantity){
                 nl+=l[i];
             }
         }
-        num-=quantity;
+        num=num-quantity;
         nl+=" ";
         nl+=to_string(num);
         l=nl;
     }
-        cput<<l<<endl;
+        cput << l << endl;
     }
     cput.close();
     fout.close();
@@ -39,7 +41,7 @@ void shopping(int itemno,int quantity){
     cput.open("Data/list.txt");
     while(fout){
         getline(fout,l);
-        cput<<l<<endl;
+        cput << l << endl;
     }
    
 }
@@ -86,15 +88,15 @@ class customer addtocart(int itmno,int qty,customer new_user){
   new_user.cart.items[new_user.cart.i].name=nam;
   stringstream geek(mul);
   new_user.cart.items[new_user.cart.i].price=0;
-  geek>>new_user.cart.items[new_user.cart.i].price;
+  geek >> new_user.cart.items[new_user.cart.i].price;
   new_user.cart.items[new_user.cart.i].quantity=qty;
     new_user.cart.i++;
-  return new_user;
+  return new_user; 
 }
 customer cartfile(customer u1){
   ifstream fin;
   ofstream fout;
-  cout<<u1.cart.items[u1.cart.i-1].name<<endl;
+  cout << u1.cart.items[u1.cart.i-1].name << endl;
   fout.open("Data/try.txt");
   string l;
   int flag=1;
@@ -104,16 +106,16 @@ customer cartfile(customer u1){
     if(l==u1.username)
     {
       flag=0;
-      fout<<l<<endl;
+      fout << l << endl;
       getline(fin,l);
       int x=0;
       stringstream geek(l);
-      geek>>x;
-      fout<<((u1.cart.items[u1.cart.i-1].price)*(u1.cart.items[u1.cart.i-1].quantity)+x)<<endl;
+      geek >> x;
+      fout << ((u1.cart.items[u1.cart.i-1].price)*(u1.cart.items[u1.cart.i-1].quantity)+x) << endl;
       getline(fin,l);
       stringstream peek(l);
-      peek>>x;
-      fout<<((u1.cart.items[u1.cart.i-1].quantity)+x)<<endl;
+      peek >> x;
+      fout << ((u1.cart.items[u1.cart.i-1].quantity)+x) << endl;
     }
     else
     {
@@ -122,18 +124,18 @@ customer cartfile(customer u1){
   }
   if(flag)
   {
-  fout<<u1.username<<endl;
-  fout<<(u1.cart.items[u1.cart.i-1].price)*(u1.cart.items[u1.cart.i-1].quantity)<<endl;
-  fout<<u1.cart.items[u1.cart.i-1].quantity<<endl;
+  fout << u1.username << endl;
+  fout << (u1.cart.items[u1.cart.i-1].price)*(u1.cart.items[u1.cart.i-1].quantity) << endl;
+  fout << u1.cart.items[u1.cart.i-1].quantity << endl;
   }
   fin.close();
   fout.close();
   fin.open("Data/try.txt");
   fout.open("Data/cart.txt");
   while(fin){
-    fin>>l;
+    fin >> l;
     if(fin.eof())break;
-    fout<<l<<endl;
+    fout << l << endl;
   }
   fin.close();
   fout.close();
@@ -148,19 +150,18 @@ customer viewcart(customer u1){
     getline(fin,l);
     if(l==u1.username){
       flag=0;
-      cout<<l<<endl;
+      cout << l << endl;
       getline(fin,l);
-      cout<<l<<endl;
+      cout << l << endl;
       getline(fin,l);
-      cout<<l<<endl;
+      cout << l << endl;
       getline(fin,l);
-      cout<<l<<endl;
+      cout << l << endl;
       getline(fin,l);
       return u1;
-
     }
   }
   if(flag)
-    cout<<"sorry no data found...\n";
+    cout << "sorry no data found..." << endl;
   return u1;
 }

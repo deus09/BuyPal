@@ -10,27 +10,27 @@ int verifyadmin(string name, string password)
   {
 		fin >> n;
 		fin >> p;
-		break;
-	}
-	if(n==name&&p==password)
-  {
-      cout<<"\nwelcome!!!!!"<<endl;
+		if(n==name&&p==password)
+    {
+      cout << endl << endl << "Log-in Successful :)" << endl << endl;
       return 1;
-  }
-	else
-  {
-      cout<<"\nRe-enter Name and Password\n";
-      return 0;
-  }
+    }
+    break;
+	}
+  cout << endl << endl << "Incorrect Name or Password" << endl;
+  return 0;
 }
 
 void update_shopping_list()
 {
-  cout<<"[1] Create list....(only for New Admin) ------> warning : you will lose all your data :)\n";
-  cout<<"[2] View & edit list.....\n";
-  int ch;
-  cin>>ch;
-  if(ch==1)
+  cout << endl;
+  cout << "[1] Create list....(only for New Admin) ------> warning : you will lose all your data :)" << endl;
+  cout << "[2] View & edit list....." << endl;
+  cout << endl;
+  cout << "Choice : ";
+  string ch;
+  cin >> ch;
+  if(ch=="1")
   {
     ofstream fout;
     int i=0;
@@ -38,52 +38,81 @@ void update_shopping_list()
     while(fout)
     {
       i++;
+      string choice;
       string itemname;
       float price;
       int quantity;
-      cout<<"\nItem-Name:";
-      cin>>itemname;
-      cout<<"\nPrice:";
-      cin>>price;
-      cout<<"\nQuantity:";
-      cin>>quantity;
-      if(price==-1||quantity==-1)
+      cout << endl << "Item-Name:";
+      cin >> itemname;
+      cout << endl << "Price:";
+      cin >> price;
+      cout << endl << "Quantity:";
+      cin >> quantity;
+      fout << i << " " << itemname << " " << price << " " << quantity << endl;
+      while(true)
+      {
+        cout << "Wanna Add more items (y/n) : ";
+        cin >> choice;
+        if(choice!="y" && choice!="n")
+        {
+          cout << endl << "Wrong Input" << endl;
+        }
+        else
+        {
+          break;
+        }
+      }
+      if(choice=="n")
         break;
-      fout <<i<<" "<<itemname<<" "<<price<<" "<<quantity<< endl;
     }
     fout.close();
   }
-  else
+  else if(ch=="2")
   {
     ifstream fin;
     string l;
     fin.open("Data/list.txt");
-    while(fin)
+    if(fin.peek() == ifstream::traits_type::eof())
     {
-      getline(fin,l);
-      cout<<l<<endl;
-      if(fin.eof())break;
+      cout << endl;
+      cout << "List is Empty :( " << endl;
     }
-    fin.close();
-    int f;
+    else
+    {
+      while(fin)
+      {
+        getline(fin,l);
+        cout << l << endl;
+        if(fin.eof())break;
+      }
+      fin.close();
+    }
+    string flag;
     cout << endl;
-    cout<<"[1] Update List\n";
-    cout<<"[2] Add more Items\n";
-    cout<<"[3] Leave as it is\n";
-    cout<<"\nChoice : ";
-    cin>>f;
-    if(f==1)
+    cout << "[1] Update List" << endl;
+    cout << "[2] Add more Items" << endl;
+    cout << "[3] Leave as it is" << endl;
+    cout << endl << "Choice : ";
+    cin >> flag;
+    if(flag=="1")
     {
       ifstream fin;
       string l;
       fin.open("Data/list.txt");
-      while(fin)
+      if(fin.peek() == ifstream::traits_type::eof())
       {
-        getline(fin,l);
-        cout<<l<<endl;
-        if(fin.eof())break;
+          cout << "List is Empty :(" << endl;
       }
-      fin.close();
+      else
+      {
+        while(fin)
+        {
+          getline(fin,l);
+          cout << l << endl;
+          if(fin.eof())break;
+        }
+        fin.close();
+      }
       int itno;
       cout<<"Enter the Item no. which you want to update:";
       cin>>itno;
@@ -99,17 +128,17 @@ void update_shopping_list()
         getline(file,l);
         if(l[0]-'0'==itno)
         {
-          cout<<"Enter new name :\n";
-          cin>>itemname;
-          cout<<"Enter the price :\n";
-          cin>>price;
-          cout<<"Enter new quantity :\n";
-          cin>>quantity;
-          file1<<itno<<" "<< itemname<<" "<<price<<" "<<quantity<<endl;
+          cout << "Enter new name: " << endl;
+          cin >> itemname;
+          cout << "Enter the price: " << endl;
+          cin >> price;
+          cout << "Enter new quantity: " << endl;
+          cin >> quantity;
+          file1 << itno << " " << itemname << " " << price << " " << quantity << endl;
         }
         else
         {
-          file1<<l<<endl;
+          file1 << l << endl;
         }
       }
       file.close();
@@ -122,7 +151,7 @@ void update_shopping_list()
         file << l << endl;
       }
     }
-    else if(f==2)
+    else if(flag=="2")
     {
       ifstream fin;
       string l;
@@ -138,47 +167,52 @@ void update_shopping_list()
       ofstream fout;
       fout.open("Data/list.txt",ios::out|ios::app);
       string lol;
-      fout<<endl;
+      fout << endl;
       while(true)
       {
         sn++;
         string itemname;
         float price;
         int quantity;
-        cout<<"\nItemname:";
-        cin>>itemname;
-        cout<<"\nPrice:";
-        cin>>price;
-        cout<<"\nQuantity:";
-        cin>>quantity;
+        cout << endl << "Item-Name:";
+        cin >> itemname;
+        cout << endl << "Price:";
+        cin >> price;
+        cout << endl << "Quantity:";
+        cin >> quantity;
         if(price==-1||quantity==-1)
         {
-          cout<<"\nyou entered wrong price or quantity......\n";
-          cout<<"\ndo you wanna edit or quit....\n";
-          cout<<"\n [1] Edit again and [2] Quit....\n";
+          cout << endl << "you entered wrong price or quantity......" << endl;
+          cout << endl << "do you wanna edit or quit...." << endl;
+          cout << endl << "[1] Edit again and [2] Quit...." << endl;
           int p;
-          cin>>p;
+          cin >> p;
           if(p==1)
           {
-            cout<<"itemname:";
-            cin>>itemname;
-            cout<<"price:";
-            cin>>price;
-            cout<<"quantity:";
+            cout << "Item-Name:";
+            cin >> itemname;
+            cout << "Price:";
+            cin >> price;
+            cout << "Quantity:";
           }
           else
           {
             break;
           }
         }
-        fout <<sn<<" "<<itemname<<" "<<price<<" "<<quantity<< endl;
-        cout<<"Do you wanna Exit (y/n)....";
+        fout << sn << " " << itemname << " " << price << " " << quantity << endl;
+        cout << "Do you wanna Exit (y/n)....";
         char w;
-        cin>>w;
+        cin >> w;
         if(w=='y')
           break;
       }
     }
+  }
+  else
+  {
+    cout << endl;
+    cout << "Wrong Input :(" << endl; 
   }
 }
 
@@ -187,34 +221,46 @@ void view_carts()
     ifstream fin;
     string l;
     fin.open("Data/cart.txt");
+    if(fin.peek() == ifstream::traits_type::eof())
+    {
+      cout << endl << "Cart is Empty :) " << endl;
+      return;
+    }
     while(fin)
     {
       getline(fin,l);
-      cout<<l<<endl;
+      cout << l << endl;
     }
 }
 
-
-void admin() {
+int admin() {
+  int count=0;
 	string name, password;
-	int flag;
+	int flag=0;
 	do{
-    cout << "Name : ";
+    cout << endl << "Name : ";
     cin >> name;
     cout << "Password : ";
     password=input_password();
+    password=encrypt(password);
     flag = verifyadmin(name, password);
-	}while(!flag);
-	int choice;
+    count++;
+    if(count==3 && !flag)
+    {
+      cout << endl << "Try again :( " << endl << endl;
+      return 1;
+    }
+  }while(!flag);
+	string choice;
   flag=1;
   while(flag)
   {
-	  cout<<"\n[1]view & update list.....\n ";
-	  cout<<"[2]view carts.....\n";
-	  cout<<"[3]delivery part.....\n";
-	  cout<<"\nChoice:";
-    cin>>choice;
-    if(choice==1)
+	  cout << "[1] View & Update list...." << endl;
+	  cout << "[2] View carts....." << endl;
+	  cout << "[3] Delivery part....." << endl;
+    cout << endl << "Choice : ";
+    cin >> choice;
+    if(choice=="1")
     {
       update_shopping_list();
       ifstream fin;
@@ -227,18 +273,23 @@ void admin() {
         if(fin.eof())break;
       }
     }
-    else if(choice==2)
+    else if(choice=="2")
     {
       view_carts();
     }
-    else
+    else if(choice=="3")
     {
       delivery();
     }
-    cout << "\n[1]Continue \n";
-    cout << "Press another Key to exit\n";
+    else
+    {
+      cout << "Wrong Input :( \n";
+    }
+    cout << endl << endl << "[1] Continue" << endl;
+    cout << "Press another Key to exit" << endl;
     cin >> flag;
     if(flag!=1)
       flag=0;
   }
+  return 0;
 }
