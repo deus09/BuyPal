@@ -157,7 +157,7 @@ int _customer()
             cin >> mp;
             if(mp==1)
             {
-                //makepayment(new_user);
+                new_user=makepayment(new_user);
             }
         }
         else
