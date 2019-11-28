@@ -123,6 +123,7 @@ int _customer()
         cin >> sch;
         if(sch=="1")
         {
+            vector<pair<int,int> > list;
             int flag=1;
             while(flag)
             {
@@ -142,6 +143,7 @@ int _customer()
                 cout << endl << "Quantity: ";
                 cin >> qntno;
                 new_user=addtocart(itmno,qntno,new_user);
+                list.push_back({itmno,qntno});
                 new_user=cartfile(new_user);
                 cout << "[1] Continue shopping:";
                 cin >> flag;
@@ -158,6 +160,10 @@ int _customer()
             if(mp==1)
             {
                 new_user=makepayment(new_user);
+                for(auto items : list)
+                {
+                    shopping(items.first,items.second);
+                }
             }
         }
         else

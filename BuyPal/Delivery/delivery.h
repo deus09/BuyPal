@@ -34,6 +34,7 @@ void AssignCart()
             {
                 getline(file_AddressSearch,AddressSearchString);
                 getline(file_AddressSearch,AddressSearchString);
+                getline(file_AddressSearch,AddressSearchString);
                 break;
             }
         }
@@ -51,8 +52,10 @@ void AssignCart()
             file1.open("Data/DeliveryBoy4.txt",ios::app);
         file1 << AddressSearchString << endl << CartSearchString << endl;
         file1.close();
-        fileCart.close();
     }
+    fileCart.close();
+    ofstream fout("Data/ShoppingCart.txt");
+    fout.close();
 }
 
 void completeDelivery()

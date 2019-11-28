@@ -114,8 +114,8 @@ bool email_otp(string username,string email_id)
         {
             generate_mail(username,email_id);
             string s="curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd \
-            --mail-from 'Admin's Email id' --mail-rcpt '" + email_id + "' \
-            --upload-file 'Data/mail.txt' --user 'Admin's Email id:Password' --insecure";
+            --mail-from 'buypaliitj@gmail.com' --mail-rcpt '" + email_id + "' \
+            --upload-file 'Data/mail.txt' --user 'buypaliitj@gmail.com:buypalnsfw789' --insecure";
             const char *command=s.c_str();
             system(command);
             return true;
@@ -162,7 +162,7 @@ bool is_user(string username,string password)
 
 customer createid()
 {
-    string username,password="",check_password,email_id;
+    string username,password="",check_password="0",email_id;
     bool verify=false;
     while(!verify)
     {
@@ -181,7 +181,7 @@ customer createid()
         }
         cout << "Username : ";
         cin >> username;
-        while(!is_password_valid(password))
+        while(!is_password_valid(password) || password!=check_password)
         {
             cout << endl << "!!! Password should carry at least one special character and a number" << endl;
             cout << "Password : ";
@@ -192,7 +192,6 @@ customer createid()
             if(password!=check_password)
             {
                 cout << "Please Enter same password :(" << endl;
-                continue;
             }
         }
         if(!is_already_exists(username,email_id))

@@ -1,4 +1,6 @@
-devil401
-0
-0
+1 chai 10 100
+2 coffee 10  190
+3 sandwich 40  20
+
+
 

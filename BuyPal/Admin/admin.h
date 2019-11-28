@@ -220,7 +220,7 @@ void view_carts()
 {
     ifstream fin;
     string l;
-    fin.open("Data/cart.txt");
+    fin.open("Data/ShoppingCart.txt");
     if(fin.peek() == ifstream::traits_type::eof())
     {
       cout << endl << "Cart is Empty :) " << endl;

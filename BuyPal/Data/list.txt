@@ -1,2 +1,7 @@
+1 chai 10 100
+2 coffee 10  190
+3 sandwich 40  20
 
-1 dev 12 12
+
+
+

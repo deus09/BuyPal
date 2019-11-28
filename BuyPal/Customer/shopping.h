@@ -20,7 +20,7 @@ void shopping(int itemno,int quantity){
     while(fout){
      getline(fout,l);
      if((l[0]-'0')==itemno)
-    {
+     {
         int count=0,num=0;
        
         for(int i=0;i<l.size();i++){
@@ -41,7 +41,7 @@ void shopping(int itemno,int quantity){
         nl+=" ";
         nl+=to_string(num);
         l=nl;
-    }
+      }
         cput << l << endl;
     }
     cput.close();
@@ -95,11 +95,11 @@ customer makepayment(customer u1)
     getline(cin,cardname);
     if(verifycard(cardno,cvv,val,cardname)){
       cout << "Your payment done successfully..:)" << endl;
-      ofstream cop;
+      fstream cop;
       ofstream pop;
       pop.open("Data/try.txt");
       fin.open("Data/cart.txt");
-      cop.open("Data/ShoppingCart.txt");
+      cop.open("Data/ShoppingCart.txt",ios::app);
       string name,bill,qty;
       while(fin)
       {
@@ -116,7 +116,7 @@ customer makepayment(customer u1)
         }
         else
         {
-            pop << l << endl;
+          pop << l << endl;
         }
       }
       fin.close();
@@ -135,8 +135,44 @@ customer makepayment(customer u1)
   }
   else
   {
-      cout << "Thank you...visit again :)" << endl;
+    ofstream cop;
+    ofstream pop;
+    pop.open("Data/try.txt");
+    fin.open("Data/cart.txt");
+    cop.open("Data/ShoppingCart.txt");
+    string name,bill,qty;
+    while(fin)
+    {
+      int flag=0;
+      getline(fin,l);
+      if(l==u1.username)
+      {
+        name=l;
+        getline(fin,l);
+        bill=l;
+        getline(fin,l);
+        qty=l;
+        cop << "1020 " << name << " " << bill << " " << qty << endl;
+      }
+      else
+      {
+          pop << l << endl;
+      }
+    }
+    fin.close();
+    pop.close();
+    cop.close();
+    fin.open("Data/try.txt");
+    pop.open("Data/cart.txt");
+    while(fin)
+    {
+      getline(fin,l);
+      pop << l << endl;
+    }
+    fin.close();
+    pop.close();
   }
+  cout << "Thank you...visit again :)" << endl;
   return u1;
 }
 customer create_user_obj(string username){
@@ -157,7 +193,8 @@ customer create_user_obj(string username){
   obj.email_id=l;
   return obj;
 }
-class customer addtocart(int itmno,int qty,customer new_user){
+
+customer addtocart(int itmno,int qty,customer new_user){
   ifstream fin;
   string l,nam,mul,vim;
   fin.open("Data/list.txt");
@@ -192,7 +229,6 @@ customer cartfile(customer u1)
 {
   ifstream fin;
   ofstream fout;
-  cout << u1.cart.items[u1.cart.i-1].name << endl;
   fout.open("Data/try.txt");
   string l;
   int flag=1;
