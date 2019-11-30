@@ -86,8 +86,8 @@ void DisplayDeliverySlot()
             getline(file1,s);
             cout<<s<<endl;
         }
-    file1.close();
     }
+    file1.close();
     cout << endl << "Slot 11AM to 2PM:-" << endl;
     file1.open("Data/DeliveryBoy1.txt",ios::in);
     if(file1.peek()==ifstream::traits_type::eof())
@@ -101,8 +101,8 @@ void DisplayDeliverySlot()
             getline(file1,s);
             cout<<s<<endl;
         }
-        file1.close();
     }
+    file1.close();
     cout << endl << "Slot 2PM to 5PM:-" << endl;
     file1.open("Data/DeliveryBoy2.txt",ios::in);
     if(file1.peek()==ifstream::traits_type::eof())
@@ -116,8 +116,8 @@ void DisplayDeliverySlot()
             getline(file1,s);
             cout<<s<<endl;
         }
-        file1.close();
     }
+    file1.close();
     cout << endl << "Slot 5PM to 8PM:-" << endl;
     file1.open("Data/DeliveryBoy3.txt",ios::in);
     if(file1.peek()==ifstream::traits_type::eof())
@@ -131,8 +131,8 @@ void DisplayDeliverySlot()
             getline(file1,s);
             cout<<s<<endl;
         }
-        file1.close();
     }
+    file1.close();
     cout << endl << "Slot 8PM to 11PM:-" << endl;
     file1.open("Data/DeliveryBoy4.txt",ios::in);
     if(file1.peek()==ifstream::traits_type::eof())
@@ -146,8 +146,8 @@ void DisplayDeliverySlot()
             getline(file1,s);
             cout<<s<<endl;
         }
-        file1.close();
     }
+    file1.close();
 }
 
 void delivery()
