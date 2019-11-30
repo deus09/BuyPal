@@ -95,6 +95,24 @@ customer makepayment(customer u1)
     getline(cin,cardname);
     if(verifycard(cardno,cvv,val,cardname)){
       cout << "Your payment done successfully..:)" << endl;
+      string slot;
+      cout << endl <<  "Choose Time slot" << endl;
+      cout << "[1] 8:00 AM to 11:00 AM : " << endl;
+      cout << "[2] 11:00 AM to 02:00 PM : " << endl;
+      cout << "[3] 02:00 PM to 05:00 PM : " << endl;
+      cout << "[4] 05:00 PM to 08:00 PM : " << endl;
+      cout << "[5] 08:00 PM to 11:00 PM : " << endl;
+      cin >> slot;
+      if(slot=="1")
+        slot="0900";
+      else if(slot=="2")
+        slot="1200";
+      else if(slot=="3")
+        slot="1500";
+      else if(slot=="4")
+        slot="1800";        
+      else if(slot=="5")
+        slot="2100";
       fstream cop;
       ofstream pop;
       pop.open("Data/try.txt");
@@ -112,7 +130,7 @@ customer makepayment(customer u1)
           bill=l;
           getline(fin,l);
           qty=l;
-          cop << "1020 " << name << " " << bill << " " << qty << endl;
+          cop << slot << " " << name << " " << bill << " " << qty << endl;
         }
         else
         {
@@ -135,6 +153,24 @@ customer makepayment(customer u1)
   }
   else
   {
+    string slot;
+      cout << endl <<  "Choose Time slot" << endl;
+      cout << "[1] 8:00 AM to 11:00 AM : " << endl;
+      cout << "[2] 11:00 AM to 02:00 PM : " << endl;
+      cout << "[3] 02:00 PM to 05:00 PM : " << endl;
+      cout << "[4] 05:00 PM to 08:00 PM : " << endl;
+      cout << "[5] 08:00 PM to 11:00 PM : " << endl;
+      cin >> slot;
+      if(slot=="1")
+        slot="0900";
+      else if(slot=="2")
+        slot="1200";
+      else if(slot=="3")
+        slot="1500";
+      else if(slot=="4")
+        slot="1800";        
+      else if(slot=="5")
+        slot="2100";
     ofstream cop;
     ofstream pop;
     pop.open("Data/try.txt");
@@ -152,7 +188,7 @@ customer makepayment(customer u1)
         bill=l;
         getline(fin,l);
         qty=l;
-        cop << "1020 " << name << " " << bill << " " << qty << endl;
+        cop << slot << " " << name << " " << bill << " " << qty << endl;
       }
       else
       {
