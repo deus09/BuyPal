@@ -38,7 +38,6 @@ void shopping(int itemno,int quantity){
             }
         }
         num=num-quantity;
-        nl+=" ";
         nl+=to_string(num);
         l=nl;
       }
